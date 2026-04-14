@@ -1,9 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import { playHaptic } from '../utils/audioUtils';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const { lang, setLang, t } = useLanguage();
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
@@ -16,14 +19,20 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
+    playHaptic();
     logout();
     navigate('/login');
+  };
+
+  const toggleLang = () => {
+    playHaptic();
+    setLang(lang === 'en' ? 'hi' : 'en');
   };
 
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo" id="logo-link">
+        <Link to="/" className="nav-logo" id="logo-link" onClick={playHaptic}>
           <div className="logo-icon">
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
               <circle cx="18" cy="18" r="18" fill="url(#logoGrad)"/>
@@ -39,30 +48,47 @@ const Navbar = () => {
           </div>
           <div className="logo-text-wrap">
             <span className="logo-text">KRISHICOM</span>
-            <span className="logo-tagline">India Agri Intelligence</span>
+            <span className="logo-tagline">{t('intelligenceDashboard')}</span>
           </div>
         </Link>
 
         <nav className="nav-links">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/reports" className="nav-link">Market Reports</Link>
-          <Link to="/marketplace" className="nav-link">Marketplace</Link>
-          {user && <Link to="/dashboard" className="nav-link">Dashboard</Link>}
+          <Link to="/" className="nav-link" onClick={playHaptic}>{t('home')}</Link>
+          <Link to="/reports" className="nav-link" onClick={playHaptic}>{t('reports')}</Link>
+          <Link to="/marketplace" className="nav-link" onClick={playHaptic}>{t('marketplace')}</Link>
+          {user && <Link to="/dashboard" className="nav-link" onClick={playHaptic}>{t('dashboard')}</Link>}
         </nav>
 
         <div className="nav-cta">
+          <button 
+            onClick={() => {
+              playHaptic();
+              window.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'k',
+                ctrlKey: true,
+                bubbles: true
+              }));
+            }} 
+            className="nav-link" 
+            style={{ padding: '8px', opacity: 0.7 }}
+            title="Search (Ctrl + K)"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+
+          <button onClick={toggleLang} className="btn-ghost" style={{ padding: '6px 10px', fontSize: '0.75rem', fontWeight: 'bold' }}>
+            {lang === 'en' ? 'HI' : 'EN'}
+          </button>
+
           {user ? (
             <>
-              <span style={{ color: 'var(--text-secondary)', marginRight: '10px', fontSize: '0.85rem' }}>
-                Hi, {user.name} ({user.role})
-              </span>
-              <Link to="/profile" className="btn-ghost" style={{ border: 'none', marginRight: '8px' }}>My Profile</Link>
-              <button onClick={handleLogout} className="btn-outline">Logout</button>
+              <Link to="/profile" className="btn-ghost" style={{ border: 'none', marginRight: '8px' }} onClick={playHaptic}>{t('profile')}</Link>
+              <button onClick={handleLogout} className="btn-outline">{t('logout')}</button>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn-ghost" style={{ border: 'none' }}>Login</Link>
-              <Link to="/login?mode=register" className="btn-subscribe">Sign Up</Link>
+              <Link to="/login" className="btn-ghost" style={{ border: 'none' }} onClick={playHaptic}>{t('login')}</Link>
+              <Link to="/login?mode=register" className="btn-subscribe" onClick={playHaptic}>{t('signUp')}</Link>
             </>
           )}
         </div>
