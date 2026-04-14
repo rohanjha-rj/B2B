@@ -1,11 +1,24 @@
-// Subtle haptic sounds for premium UI interaction
-const clickSound = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTdvT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT=");
-
+// Reliable haptic sounds using Web Audio API for premium UI interaction
 export const playHaptic = () => {
   const isSoundEnabled = localStorage.getItem('khaptic') !== 'false';
-  if (isSoundEnabled) {
-    const sound = clickSound.cloneNode();
-    sound.volume = 0.05;
-    sound.play().catch(() => {}); // Browser might block auto-play
-  }
+  if (!isSoundEnabled) return;
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    // Quick "pop" sound parameters
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime); 
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05); 
+    
+    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.05);
+  } catch(e) {}
 };

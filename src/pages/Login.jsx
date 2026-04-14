@@ -2,8 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BuyerIcon, SellerIcon } from '../components/Icons';
+import { useLanguage } from '../context/LanguageContext';
 
 const Login = () => {
+  const { t } = useLanguage();
   const { login, register, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -60,10 +62,10 @@ const Login = () => {
       <div className="price-index-card" style={{ maxWidth: '450px', width: '100%', padding: '40px' }}>
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '10px' }}>
-            {isRegistering ? 'Create Account' : 'Welcome Back'}
+            {isRegistering ? t('createAcct') : t('welcomeBack')}
           </h2>
           <p className="section-desc" style={{ fontSize: '0.95rem' }}>
-            {isRegistering ? 'Join India\'s leading B2B platform.' : 'Sign in to access your intelligence dashboard.'}
+            {isRegistering ? t('joinIndia') : t('signInAccess')}
           </p>
         </div>
 
@@ -77,7 +79,7 @@ const Login = () => {
           {isRegistering && (
             <>
               <div style={{ marginBottom: '4px' }}>
-                <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-muted)', marginBottom: '12px' }}>Identity Role</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-muted)', marginBottom: '12px' }}>{t('identityRole')}</label>
                 <div style={{ display: 'flex', gap: '12px' }}>
                   <button 
                     type="button" 
@@ -98,7 +100,7 @@ const Login = () => {
                       fontWeight: '600'
                     }}
                   >
-                    <BuyerIcon size={18} /> I am a Buyer
+                    <BuyerIcon size={18} /> {t('IamBuyer')}
                   </button>
                   <button 
                     type="button" 
@@ -119,18 +121,18 @@ const Login = () => {
                       fontWeight: '600'
                     }}
                   >
-                    <SellerIcon size={18} /> I am a Seller
+                    <SellerIcon size={18} /> {t('IamSeller')}
                   </button>
                 </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Full Name</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>{t('fullName')}</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} required 
                   style={{ width: '100%', padding: '12px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: '8px', color: '#fff' }} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Company</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>{t('company')}</label>
                 <input type="text" name="company" value={formData.company} onChange={handleChange} required 
                   style={{ width: '100%', padding: '12px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: '8px', color: '#fff' }} />
               </div>
@@ -138,24 +140,24 @@ const Login = () => {
           )}
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Email Address</label>
+            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>{t('emailAddress')}</label>
             <input type="email" name="email" value={formData.email} onChange={handleChange} required 
               style={{ width: '100%', padding: '12px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: '8px', color: '#fff' }} />
           </div>
           
           <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Password</label>
+            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>{t('password')}</label>
             <input type="password" name="password" value={formData.password} onChange={handleChange} required 
               style={{ width: '100%', padding: '12px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: '8px', color: '#fff' }} />
           </div>
 
           <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
-            {isRegistering ? `Sign Up as ${formData.role}` : 'Log In'}
+            {isRegistering ? `${t('signUpAs')} ${formData.role}` : t('logInBtn')}
           </button>
         </form>
 
         <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-          {isRegistering ? 'Already have an account? ' : 'New to KRISHICOM? '}
+          {isRegistering ? t('alreadyHave') : t('newTo')}
           <button 
             type="button"
             onClick={() => {
@@ -165,7 +167,7 @@ const Login = () => {
             }} 
             style={{ color: 'var(--green-400)', fontWeight: '600', textDecoration: 'underline' }}
           >
-            {isRegistering ? 'Log In here' : 'Create an Account'}
+            {isRegistering ? t('logInHere') : t('createAnAcct')}
           </button>
         </div>
 

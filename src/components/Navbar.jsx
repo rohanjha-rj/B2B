@@ -76,8 +76,9 @@ const Navbar = () => {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           </button>
 
-          <button onClick={toggleLang} className="btn-ghost" style={{ padding: '6px 10px', fontSize: '0.75rem', fontWeight: 'bold' }}>
-            {lang === 'en' ? 'HI' : 'EN'}
+          <button onClick={toggleLang} className="btn-outline" style={{ padding: '6px 14px', fontSize: '0.8rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px', borderRadius: '100px', borderColor: 'var(--green-500)', color: 'var(--green-400)', background: 'rgba(76,175,80,0.1)' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            {lang === 'en' ? 'हिन्दी (HI)' : 'English (EN)'}
           </button>
 
           {user ? (

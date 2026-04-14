@@ -134,7 +134,7 @@ const Dashboard = () => {
       <div style={{ marginBottom: '64px', position: 'relative' }}>
         <div className="section-tag">{t('intelligenceDashboard')}</div>
         <h2 className="section-title">{t('terminalAccess')}: <span className="gradient-text">{user.name}</span></h2>
-        <p className="section-desc" style={{ fontSize: '1.1rem' }}>Global parity trends and domestic price benchmarks for Q2 2026.</p>
+        <p className="section-desc" style={{ fontSize: '1.1rem' }}>{t('dashDesc')}</p>
         
         {isRefreshing && (
           <div style={{ position: 'absolute', bottom: '-20px', left: 0, width: '100%', height: '2px', background: 'rgba(76,175,80,0.1)', overflow: 'hidden', borderRadius: '2px' }}>
@@ -161,33 +161,33 @@ const Dashboard = () => {
             <div className="price-index-card glass animate-border" style={{ padding: '36px' }} onClick={playHaptic}>
             <div className="pic-header">
                 <div className="pic-icon" style={{ background: 'rgba(76,175,80,0.1)', color: 'var(--green-400)' }}><UreaIcon /></div> 
-                <div className="pic-name" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>Urea CFR India</div>
+                <div className="pic-name" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>{t('ureaCfr')}</div>
             </div>
             <div className="pic-price" style={{ margin: '20px 0 10px', fontSize: '2.4rem' }}>₹{liveStats.urea.toLocaleString()}<span>/t</span></div>
             <div className="pic-change up" style={{ fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ padding: '2px 8px', background: 'rgba(76,175,80,0.1)', borderRadius: '4px' }}>▲ +5.2% Quarterly</span>
+                <span style={{ padding: '2px 8px', background: 'rgba(76,175,80,0.1)', borderRadius: '4px' }}>▲ +5.2% {t('quarterly')}</span>
             </div>
             </div>
             
             <div className="price-index-card glass animate-border" style={{ padding: '36px' }} onClick={playHaptic}>
             <div className="pic-header">
                 <div className="pic-icon" style={{ background: 'rgba(255,153,51,0.1)', color: 'var(--saffron)' }}><DapIcon /></div> 
-                <div className="pic-name" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>DAP Standard</div>
+                <div className="pic-name" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>{t('dapStd')}</div>
             </div>
             <div className="pic-price" style={{ margin: '20px 0 10px', fontSize: '2.4rem' }}>₹{liveStats.dap.toLocaleString()}<span>/t</span></div>
             <div className="pic-change up" style={{ fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ padding: '2px 8px', background: 'rgba(255,153,51,0.1)', borderRadius: '4px' }}>▲ +1.8% Monthly</span>
+                <span style={{ padding: '2px 8px', background: 'rgba(255,153,51,0.1)', borderRadius: '4px' }}>▲ +1.8% {t('monthly')}</span>
             </div>
             </div>
 
             <div className="price-index-card glass animate-border" style={{ padding: '36px' }} onClick={playHaptic}>
             <div className="pic-header">
                 <div className="pic-icon" style={{ background: 'rgba(100,181,246,0.1)', color: 'var(--stable)' }}><MopIcon /></div> 
-                <div className="pic-name" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>MOP White</div>
+                <div className="pic-name" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>{t('mopWhite')}</div>
             </div>
             <div className="pic-price" style={{ margin: '20px 0 10px', fontSize: '2.4rem' }}>₹{liveStats.mop.toLocaleString()}<span>/t</span></div>
             <div className="pic-change stable" style={{ fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ padding: '2px 8px', background: 'rgba(100,181,246,0.1)', borderRadius: '4px' }}>● Market Stability</span>
+                <span style={{ padding: '2px 8px', background: 'rgba(100,181,246,0.1)', borderRadius: '4px' }}>● {t('mktStability')}</span>
             </div>
             </div>
         </div>
@@ -195,11 +195,11 @@ const Dashboard = () => {
 
       <div className="suite-dashboard glass" style={{ maxWidth: '100%', padding: '40px', borderRadius: '32px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-            <div className="dash-chart-title" style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>Import Parity Benchmark (H1 2026)</div>
+            <div className="dash-chart-title" style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>{t('importParity')}</div>
             <div className="pic-badge stable" style={{ margin: 0, padding: '6px 14px', background: 'rgba(100,181,246,0.1)' }}>{t('liveData')}</div>
         </div>
         <div style={{ height: '480px', position: 'relative' }}>
-          {chartData ? <Line options={options} data={chartData} /> : <div style={{ color: 'var(--text-muted)', display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>Synchronizing intelligence matrices...</div>}
+          {chartData ? <Line options={options} data={chartData} /> : <div style={{ color: 'var(--text-muted)', display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>{t('syncMat')}</div>}
         </div>
       </div>
     </div>
