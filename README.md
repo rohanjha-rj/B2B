@@ -51,6 +51,5 @@ KRISHICOM is India's premier B2B intelligence platform for the fertilizer and ag
 ## 🔐 Authentication Rules
 - **Admin Access**: Accounts with "admin" in their company name are automatically granted elevated system privileges and pricing controls.
 
----
 
 *© 2026 KRISHICOM Intelligence. All rights reserved.*
